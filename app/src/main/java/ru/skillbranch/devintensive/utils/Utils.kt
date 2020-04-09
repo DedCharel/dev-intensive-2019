@@ -81,7 +81,7 @@ object Utils {
     }
 
     fun toInitials(firstName: String?, lastName: String?): String? {
-        var result:String? = null
+        var result:String? = ""
         if((!firstName?.trim().isNullOrEmpty()) or (!lastName?.trim().isNullOrEmpty())) {
            if  (!firstName?.trim().isNullOrEmpty()) {
                result = firstName?.trim()?.substring(0,1)?.toUpperCase()
@@ -89,7 +89,7 @@ object Utils {
             if (!lastName?.trim().isNullOrEmpty()) {
                 result += lastName?.trim()?.substring(0,1)?.toUpperCase()
             }
-        }
+        } else {result = null}
         return result
     }
 

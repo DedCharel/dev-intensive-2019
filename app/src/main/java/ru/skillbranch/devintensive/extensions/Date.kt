@@ -28,18 +28,24 @@ fun Date.add(value:Int, units:TimeUnits = TimeUnits.SECOND): Date{
 }
 
 fun Date.humanizeDiff(date: Date= Date()): String {
-    val interval = -(this.time- date.time)/ SECOND
-
+    var isFuture = false
+    var interval:Long = 0
+    if (this>date){
+        isFuture = true
+        interval = (this.time- date.time)/SECOND
+    } else {
+        interval =  (date.time-this.time ) / SECOND
+    }
     val message:String = when(interval){
         in 0..1 -> "только что"
-        in 2..45 -> "несколько секунд назад"
-        in 46..75 -> "минуту назад"
-        in 76..45*60 ->"${TimeUnits.MINUTE.plural((interval/60).toInt())} назад"
-        in 45*60..75*60 ->"час назад"
-        in 75*60..22*3600 ->"${TimeUnits.HOUR.plural((interval/3600).toInt())} назад"
-        in 22*3600..26*3600 -> "день назад"
-        in 26*3600..360*3600*24 ->"${TimeUnits.DAY.plural((interval/3600/24).toInt())} назад"
-        else -> "более года назад"
+        in 2..45 -> if (isFuture) "через несколько секунд" else "несколько секунд назад"
+        in 46..75 -> if (isFuture) "через минуту" else "минуту назад"
+        in 76..45*60 ->if (isFuture) "через ${TimeUnits.MINUTE.plural((interval/60).toInt())}" else "${TimeUnits.MINUTE.plural((interval/60).toInt())} назад"
+        in 45*60..75*60 ->if (isFuture) "через час" else "час назад"
+        in 75*60..22*3600 ->if (isFuture) "через ${TimeUnits.HOUR.plural((interval/3600).toInt())}" else "${TimeUnits.HOUR.plural((interval/3600).toInt())} назад"
+        in 22*3600..26*3600 -> if (isFuture) "через день" else "день назад"
+        in 26*3600..360*3600*24 ->if (isFuture) "через ${TimeUnits.DAY.plural((interval/3600/24).toInt())}" else "${TimeUnits.DAY.plural((interval/3600/24).toInt())} назад"
+        else -> if (isFuture) "более чем через год" else "более года назад"
     }
 return "$message"
 }
