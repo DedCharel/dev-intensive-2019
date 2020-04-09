@@ -7,7 +7,7 @@ const val SECOND = 1000L
 const val MINUTE = 60 * SECOND
 const val HOUR = 60 * MINUTE
 const val DAY = 24 * HOUR
-fun Date.format(pattern:String = "HH:mm:ss dd:MM:yy"):String{
+fun Date.format(pattern:String = "HH:mm:ss dd.MM.yy"):String{
     val dateFormat = SimpleDateFormat(pattern, Locale("ru"))
     return dateFormat.format(this)
 }
@@ -35,10 +35,10 @@ fun Date.humanizeDiff(date: Date= Date()): String {
         in 2..45 -> "несколько секунд назад"
         in 46..75 -> "минуту назад"
         in 76..45*60 ->"${TimeUnits.MINUTE.plural((interval/60).toInt())} назад"
-        in (45*60+1)..75*60 ->"час назад"
-        in (75*60+1)..22*3600 ->"${TimeUnits.HOUR.plural((interval/3600).toInt())} назад"
-        in (22*3600+1)..26*3600 -> "день назад"
-        in (26*3600+1)..360*3600*24 ->"${TimeUnits.DAY.plural((interval/3600/24).toInt())} назад"
+        in 45*60..75*60 ->"час назад"
+        in 75*60..22*3600 ->"${TimeUnits.HOUR.plural((interval/3600).toInt())} назад"
+        in 22*3600..26*3600 -> "день назад"
+        in 26*3600..360*3600*24 ->"${TimeUnits.DAY.plural((interval/3600/24).toInt())} назад"
         else -> "более года назад"
     }
 return "$message"
@@ -82,8 +82,8 @@ enum class TimeUnits{
                 }
                 1 ->{
                     result = when(this.name){
-                        SECOND.name -> "$int секунда"
-                        MINUTE.name -> "$int минута"
+                        SECOND.name -> "$int секунду"
+                        MINUTE.name -> "$int минуту"
                         HOUR.name -> "$int час"
                         DAY.name -> "$int день"
                         else ->""
