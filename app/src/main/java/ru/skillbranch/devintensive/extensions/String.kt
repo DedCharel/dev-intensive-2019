@@ -9,3 +9,7 @@ fun String.truncate(countChar: Int = 16):String{
     return result
 
 }
+
+fun String.stripHtml(): String {
+    return replace(Regex(pattern = "(<.+?>)|(&((\\w+)|(#\\w+));)"), "").replace(Regex(pattern = " {2,}"), " ")
+}
