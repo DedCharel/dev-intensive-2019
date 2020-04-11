@@ -43,6 +43,7 @@ class Bender (var status: Status = Status.NORMAL, var question: Question = Quest
 
     private fun checkValidation(question: Question, text: String):Pair<Boolean,String>{
         Log.d("M_Bender","$question")
+        if (text.isNotEmpty()){
        return when(question){
             Question.NAME ->{
                  if ((text.isNotEmpty()) and (text[0].isUpperCase())) {
@@ -86,6 +87,7 @@ class Bender (var status: Status = Status.NORMAL, var question: Question = Quest
                true to text.toLowerCase()
            }
         }
+        }else return true to text
     }
 
 
