@@ -27,8 +27,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         setContentView(R.layout.activity_main)
         val status = savedInstanceState?.getString("STATUS") ?: Bender.Status.NORMAL.name
         val question = savedInstanceState?.getString("QUESTION") ?: Bender.Question.NAME.name
+        val answerCount = savedInstanceState?.getInt("ANSWERCOUNT")?: 0
         Log.d("M_MainActivity","onCreate $status $question")
         benderobj = Bender(Bender.Status.valueOf(status),Bender.Question.valueOf(question))
+        benderobj.answerCount = answerCount
         benderImage = iv_bender
         textTxt = tv_text
         messageEt = et_message
@@ -53,6 +55,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         super.onSaveInstanceState(outState)
         outState?.putString("STATUS", benderobj.status.name)
         outState?.putString("QUESTION", benderobj.question.name)
+        outState?.putInt("ANSWERCOUNT", benderobj.answerCount)
+
         Log.d("M_MainActivity","onSaveInstanceState ${benderobj.status.name} ${benderobj.question.name}")
     }
 

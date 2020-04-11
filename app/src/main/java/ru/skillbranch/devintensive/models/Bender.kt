@@ -3,6 +3,7 @@ package ru.skillbranch.devintensive.models
 import android.util.Log
 
 class Bender (var status: Status = Status.NORMAL, var question: Question = Question.NAME){
+    var answerCount = 0
 
     fun askQuestion() = when(question){
         Question.NAME ->Question.NAME.question
@@ -18,10 +19,19 @@ class Bender (var status: Status = Status.NORMAL, var question: Question = Quest
        return if (isValid){
         if (question.answer.contains(resultValid)){
             question = question.nextQuestion()
-            "Отлично  - это правильный ответ!\n${question.question}" to status.color
+            "Отлично - ты справился\n${question.question}" to status.color
         }else{
+            answerCount++
+            if (answerCount > 3){
+                answerCount = 0
+                status = Status.NORMAL
+                question = Question.NAME
+                "Это неправильный ответ. Давай все по новой\n${question.question}" to status.color
+
+            } else {
             status = status.nextStatus()
-            "Это не правильный ответ!\n${question.question}" to status.color
+            "Это неправильный ответ\n${question.question}" to status.color
+            }
         }
         } else {resultValid+"\n${question.question}" to status.color}
     }
@@ -79,7 +89,7 @@ class Bender (var status: Status = Status.NORMAL, var question: Question = Quest
         NORMAL(Triple(255,255,255)),
         WARNING(Triple(255,120,0)),
         DANGER(Triple(255,60,60)),
-        CRITICAL(Triple(255,255,0));
+        CRITICAL(Triple(255,0,0));
 
         fun nextStatus():Status{
             return if(this.ordinal < values().lastIndex){
