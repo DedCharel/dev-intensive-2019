@@ -1,4 +1,4 @@
-package ru.skillbranch.devintensive
+package ru.skillbranch.devintensive.ui.profile
 
 
 import android.graphics.Color
@@ -11,11 +11,12 @@ import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_profile.*
+import ru.skillbranch.devintensive.R
 import ru.skillbranch.devintensive.extensions.hideKeyboard
 import ru.skillbranch.devintensive.models.Bender
 
-class MainActivity : AppCompatActivity(), View.OnClickListener {
+class ProfileActivity : AppCompatActivity(), View.OnClickListener {
 
     lateinit var benderobj:Bender
     lateinit var benderImage:ImageView
@@ -24,7 +25,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     lateinit var sendBtn:ImageView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_profile)
         val status = savedInstanceState?.getString("STATUS") ?: Bender.Status.NORMAL.name
         val question = savedInstanceState?.getString("QUESTION") ?: Bender.Question.NAME.name
         val answerCount = savedInstanceState?.getInt("ANSWERCOUNT")?: 0
@@ -92,7 +93,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     override fun onClick(view: View?) {
-        if (view?.id == R.id.iv_send ){
+        if (view?.id == R.id.iv_send){
            sendMessage()
 
         }else{
