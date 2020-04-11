@@ -1,6 +1,6 @@
 package ru.skillbranch.devintensive
 
-import android.app.Activity
+
 import android.graphics.Color
 import android.graphics.PorterDuff
 import androidx.appcompat.app.AppCompatActivity
@@ -40,8 +40,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         textTxt.text =benderobj.askQuestion()
         sendBtn.setOnClickListener(this)
         messageEt.setOnEditorActionListener { textView, i, keyEvent ->
-            if (i == EditorInfo.IME_ACTION_DONE){
+            if (textView?.id == R.id.et_message && i == EditorInfo.IME_ACTION_DONE) {
                 sendMessage()
+
                 hideKeyboard()
                 true
             }else{
@@ -58,6 +59,36 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         outState?.putInt("ANSWERCOUNT", benderobj.answerCount)
 
         Log.d("M_MainActivity","onSaveInstanceState ${benderobj.status.name} ${benderobj.question.name}")
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        Log.d("M_MainActivity", "onRestart")
+    }
+
+    override fun onStart() {
+        super.onStart()
+        Log.d("M_MainActivity", "onStart")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d("M_MainActivity", "onResume")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.d("M_MainActivity", "onPause")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.d("M_MainActivity", "onStop")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d("M_MainActivity", "onDestroy")
     }
 
     override fun onClick(view: View?) {

@@ -15,25 +15,30 @@ class Bender (var status: Status = Status.NORMAL, var question: Question = Quest
     }
 
     fun listenAnswer(answer:String):Pair<String, Triple<Int, Int, Int>>{
-       val  (isValid, resultValid) = checkValidation(question, answer)
-       return if (isValid){
-        if (question.answer.contains(resultValid)){
-            question = question.nextQuestion()
-            "Отлично - ты справился\n${question.question}" to status.color
-        }else{
-            answerCount++
-            if (answerCount > 3){
-                answerCount = 0
-                status = Status.NORMAL
-                question = Question.NAME
-                "Это неправильный ответ. Давай все по новой\n${question.question}" to status.color
+         when(question) {
+            Question.IDLE -> return  question.question to status.color
+            else ->{
+              val  (isValid, resultValid) = checkValidation(question, answer)
+              return if (isValid){
+               if (question.answer.contains(resultValid)){
+                   question = question.nextQuestion()
+                   "Отлично - ты справился\n${question.question}" to status.color
+               }else{
+                   answerCount++
+                   if (answerCount > 3){
+                       answerCount = 0
+                       status = Status.NORMAL
+                       question = Question.NAME
+                       "Это неправильный ответ. Давай все по новой\n${question.question}" to status.color
 
-            } else {
-            status = status.nextStatus()
-            "Это неправильный ответ\n${question.question}" to status.color
+                   } else {
+                   status = status.nextStatus()
+                   "Это неправильный ответ\n${question.question}" to status.color
+                   }
+               }
+              } else {resultValid+"\n${question.question}" to status.color}
             }
-        }
-        } else {resultValid+"\n${question.question}" to status.color}
+         }
     }
 
     private fun checkValidation(question: Question, text: String):Pair<Boolean,String>{
