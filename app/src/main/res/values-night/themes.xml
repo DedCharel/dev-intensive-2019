@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccentNight</item>
+
+        <item name="colorAccentedSurface">@color/colorDividerDark</item>
+        <item name="colorIcon">@android:color/white</item>
+        <item name="colorDivider">@color/colorDividerDark</item>
+        <item name="android:statusBarColor">@android:color/black</item>
+
+    </style>
+</resources>

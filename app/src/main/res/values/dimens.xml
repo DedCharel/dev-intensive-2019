@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="fontLarge_24">24sp</dimen>
+    <dimen name="fontLarge_20">20sp</dimen>
     <dimen name="fontNormal_16">16sp</dimen>
     <dimen name="fontSmall_12">12sp</dimen>
 
@@ -9,4 +9,7 @@
     <dimen name="spacingNormal_16">16dp</dimen>
     <dimen name="spacingSmall_8">8dp</dimen>
     <dimen name="spacingTiny_4">4dp</dimen>
+    <dimen name="btn_round_size_40">40dp</dimen>
+    <dimen name="avatar_round_size">112dp</dimen>
+    <dimen name="space_maximum_72">72dp</dimen>
 </resources>
