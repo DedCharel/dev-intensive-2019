@@ -46,7 +46,7 @@ class CircleImageView @JvmOverloads constructor(
        fun setBorderWidth(@Dimension dp:Int) {
         cv_borderWidth = dp
     }
-    @ColorRes
+
     fun getBorderColor(): Int{
         return cv_borderColor
     }
