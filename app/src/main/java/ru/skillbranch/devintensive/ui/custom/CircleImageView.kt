@@ -27,7 +27,7 @@ class CircleImageView @JvmOverloads constructor(
     }
 
     private var borderColor = DEFAULT_BORDER_COLOR
-    private var borderWidth = DEFAULT_BORDER_WIDTH.toFloat()
+    private var borderWidth = Utils.dpToPix(context,DEFAULT_BORDER_WIDTH)
     private var initials:String? = null
     private val borderPaint = Paint(Paint.ANTI_ALIAS_FLAG)
     private val avatarPaint = Paint(Paint.ANTI_ALIAS_FLAG)
@@ -45,7 +45,8 @@ class CircleImageView @JvmOverloads constructor(
             )
             borderWidth = a.getDimension(
                 R.styleable.CircleImageView_cv_borderWidth,
-                DEFAULT_BORDER_WIDTH.toFloat()           )
+                Utils.dpToPix(context, DEFAULT_BORDER_WIDTH)
+            )
             initials = a.getString(R.styleable.CircleImageView_cv_initials) ?: "??"
             a.recycle()
         }

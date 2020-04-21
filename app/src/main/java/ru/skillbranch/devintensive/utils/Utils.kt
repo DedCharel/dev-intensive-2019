@@ -96,7 +96,7 @@ object Utils {
     }
 
     fun dpToPix(context: Context, dp: Int): Float {
-        return dp * context.resources.displayMetrics.density
+        return return dp * context.resources.displayMetrics.scaledDensity
     }
 
     fun isValidateRepository(repo: String): Boolean = repo.isEmpty() || repo.matches(
