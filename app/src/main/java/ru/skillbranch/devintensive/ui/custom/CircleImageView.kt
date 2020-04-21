@@ -5,6 +5,7 @@ import android.graphics.*
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.util.Log
+import android.util.TypedValue
 import androidx.annotation.ColorRes
 import androidx.annotation.Dimension
 import androidx.core.content.ContextCompat
@@ -13,6 +14,7 @@ import androidx.core.graphics.toRectF
 import ru.skillbranch.devintensive.App
 import ru.skillbranch.devintensive.R
 import ru.skillbranch.devintensive.utils.Utils
+import kotlin.math.roundToInt
 
 class CircleImageView @JvmOverloads constructor(
     context: Context,
@@ -27,7 +29,7 @@ class CircleImageView @JvmOverloads constructor(
     }
 
     private var borderColor = DEFAULT_BORDER_COLOR
-    private var borderWidth = Utils.dpToPix(context,DEFAULT_BORDER_WIDTH)
+    private var borderWidth = DEFAULT_BORDER_WIDTH
     private var initials:String? = null
     private val borderPaint = Paint(Paint.ANTI_ALIAS_FLAG)
     private val avatarPaint = Paint(Paint.ANTI_ALIAS_FLAG)
@@ -45,12 +47,12 @@ class CircleImageView @JvmOverloads constructor(
             )
             borderWidth = a.getDimension(
                 R.styleable.CircleImageView_cv_borderWidth,
-                Utils.dpToPix(context, DEFAULT_BORDER_WIDTH)
-            )
+                 DEFAULT_BORDER_WIDTH.toFloat()
+            ).roundToInt()
             initials = a.getString(R.styleable.CircleImageView_cv_initials) ?: "??"
             a.recycle()
         }
-
+        Log.d("M_CircleImageView","$borderWidth")
         setup()
     }
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
@@ -82,7 +84,7 @@ class CircleImageView @JvmOverloads constructor(
     }
 
        fun setBorderWidth(@Dimension dp:Int) {
-           borderWidth = Utils.dpToPix(context, dp)
+           borderWidth =  dp
            this.invalidate()
     }
 
@@ -146,7 +148,7 @@ class CircleImageView @JvmOverloads constructor(
     private fun setup() {
         with(borderPaint){
             style = Paint.Style.STROKE
-            strokeWidth = borderWidth
+            strokeWidth = borderWidth.toFloat()
             color = borderColor
         }
     }
@@ -171,7 +173,9 @@ class CircleImageView @JvmOverloads constructor(
         canvas.drawOval(viewRect.toRectF(),avatarPaint)
     }
     private fun drawInitials(canvas: Canvas){
-        initialsPaint.color = ContextCompat.getColor(context, R.color.color_accent)
+        val value = TypedValue()
+        App.applicationContext().theme.resolveAttribute(R.attr.colorAccent, value,true)
+        initialsPaint.color = value.data
         canvas.drawOval(viewRect.toRectF(), initialsPaint)
         with(initialsPaint){
             color =Color.WHITE
