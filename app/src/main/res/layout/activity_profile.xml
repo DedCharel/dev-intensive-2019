@@ -100,7 +100,7 @@
             android:layout_height="match_parent"
             android:layout_marginBottom="@dimen/spacingNormal_16"
             android:layout_marginTop="@dimen/spacingNormal_16"
-            android:background="@color/colorDividerLight"/>
+            android:background="@color/color_divider_light"/>
 
         <LinearLayout
             android:layout_width="0dp"

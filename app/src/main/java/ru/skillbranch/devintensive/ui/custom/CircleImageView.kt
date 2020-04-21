@@ -171,7 +171,7 @@ class CircleImageView @JvmOverloads constructor(
         canvas.drawOval(viewRect.toRectF(),avatarPaint)
     }
     private fun drawInitials(canvas: Canvas){
-        initialsPaint.color = ContextCompat.getColor(context, R.color.colorAccent)
+        initialsPaint.color = ContextCompat.getColor(context, R.color.color_accent)
         canvas.drawOval(viewRect.toRectF(), initialsPaint)
         with(initialsPaint){
             color =Color.WHITE

@@ -12,7 +12,6 @@ import android.view.View
 import android.widget.EditText
 import android.widget.TextView
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
 import kotlinx.android.synthetic.main.activity_profile.*
 import ru.skillbranch.devintensive.R
@@ -110,7 +109,7 @@ class ProfileActivity : AppCompatActivity() {
         with (btn_edit) {
             val filter: ColorFilter? = if(isEdit){
                 PorterDuffColorFilter(
-                    resources.getColor(R.color.colorAccent, theme),
+                    resources.getColor(R.color.color_accent, theme),
                     PorterDuff.Mode.SRC_IN
                 )
             }else{
