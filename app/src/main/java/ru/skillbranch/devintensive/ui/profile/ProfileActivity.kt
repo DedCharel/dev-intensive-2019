@@ -17,6 +17,7 @@ import androidx.lifecycle.ViewModelProviders
 import kotlinx.android.synthetic.main.activity_profile.*
 import ru.skillbranch.devintensive.R
 import ru.skillbranch.devintensive.models.Profile
+import ru.skillbranch.devintensive.utils.Utils
 import ru.skillbranch.devintensive.viewmodels.ProfileViewModel
 
 
@@ -56,6 +57,15 @@ class ProfileActivity : AppCompatActivity() {
             for ((k,v) in viewFilds){
                 v.text = it[k].toString()
             }
+        }
+        updateAvatar(profile)
+    }
+
+    private fun updateAvatar(profile: Profile) {
+        val init = ( Utils.toInitials(profile.firstName, profile.lastName))
+        if (init != iv_avatar.getInitials()){
+            iv_avatar.setInitials(init)
+             iv_avatar.invalidate()
         }
     }
 

@@ -1,5 +1,7 @@
 package ru.skillbranch.devintensive.utils
 
+import android.content.Context
+
 object Utils {
     fun parseFullName(fullName:String?):Pair<String?, String?>{
         return if (!fullName?.trim().isNullOrEmpty()){
@@ -93,4 +95,7 @@ object Utils {
         return result
     }
 
+    fun dpToPix(context: Context, dp: Int): Float {
+        return dp * context.resources.displayMetrics.density
+    }
 }
