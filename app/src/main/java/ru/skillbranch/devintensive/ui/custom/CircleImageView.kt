@@ -1,6 +1,7 @@
 package ru.skillbranch.devintensive.ui.custom
 
 import android.content.Context
+import android.content.res.Resources
 import android.graphics.*
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
@@ -15,6 +16,7 @@ import ru.skillbranch.devintensive.App
 import ru.skillbranch.devintensive.R
 import ru.skillbranch.devintensive.utils.Utils
 import kotlin.math.roundToInt
+import kotlin.math.truncate
 
 class CircleImageView @JvmOverloads constructor(
     context: Context,
@@ -26,17 +28,30 @@ class CircleImageView @JvmOverloads constructor(
         private const val DEFAULT_BORDER_WIDTH =2
 
         private const val DEFAULT_SIZE = 40
+
+        private val bgColors = arrayOf(
+            Color.parseColor("#7BC862"),
+            Color.parseColor("#E17076"),
+            Color.parseColor("#FAA774"),
+            Color.parseColor("#6EC9CB"),
+            Color.parseColor("#65AADD"),
+            Color.parseColor("#A695E7"),
+            Color.parseColor("#EE7AAE"),
+            Color.parseColor("#2196E3")
+
+        )
     }
 
     private var borderColor = DEFAULT_BORDER_COLOR
     private var borderWidth = DEFAULT_BORDER_WIDTH
-    private var initials:String? = null
+    private var initials:String = ""
     private val borderPaint = Paint(Paint.ANTI_ALIAS_FLAG)
     private val avatarPaint = Paint(Paint.ANTI_ALIAS_FLAG)
     private val initialsPaint = Paint(Paint.ANTI_ALIAS_FLAG)
     private val viewRect = Rect()
 
     private var isAvatarMode = true
+
 
     init {
         if (attrs != null) {
@@ -103,9 +118,7 @@ class CircleImageView @JvmOverloads constructor(
         this.invalidate()
     }
 
-    fun updateAvatar(){
 
-    }
 
     fun setInitials(init: String?){
         if (init!=null && init.isNotEmpty()){
@@ -162,7 +175,7 @@ class CircleImageView @JvmOverloads constructor(
 
     private fun resolveDefaultSize(spec:Int):Int{
         return when (MeasureSpec.getMode(spec)){
-            MeasureSpec.UNSPECIFIED -> Utils.dpToPix(context, DEFAULT_SIZE).toInt() //resolve default size
+            MeasureSpec.UNSPECIFIED ->  DEFAULT_SIZE //resolve default size
             MeasureSpec.AT_MOST -> MeasureSpec.getSize(spec) // from spec
             MeasureSpec.EXACTLY -> MeasureSpec.getSize(spec) // from spec
             else -> MeasureSpec.getSize(spec)
@@ -173,10 +186,9 @@ class CircleImageView @JvmOverloads constructor(
         canvas.drawOval(viewRect.toRectF(),avatarPaint)
     }
     private fun drawInitials(canvas: Canvas){
-        val value = TypedValue()
-        App.applicationContext().theme.resolveAttribute(R.attr.colorAccent, value,true)
-        initialsPaint.color = value.data
+        initialsPaint.color = initialsToColor(initials)
         canvas.drawOval(viewRect.toRectF(), initialsPaint)
+
         with(initialsPaint){
             color =Color.WHITE
             textAlign = Paint.Align.CENTER
@@ -184,5 +196,12 @@ class CircleImageView @JvmOverloads constructor(
         }
         val offsetY = (initialsPaint.descent() + initialsPaint.ascent())/2
         canvas.drawText(initials,viewRect.exactCenterX(),viewRect.exactCenterY()-offsetY, initialsPaint)
+    }
+    private fun initialsToColor(letters:String):Int{
+        val b = letters[0].toByte()
+        val len = bgColors.size
+        val d = b/len.toDouble()
+        val index = ((d- truncate(d))*len).toInt()
+        return bgColors[index]
     }
 }

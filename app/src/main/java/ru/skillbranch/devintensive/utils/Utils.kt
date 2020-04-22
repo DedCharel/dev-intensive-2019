@@ -95,10 +95,6 @@ object Utils {
         return result
     }
 
-    fun dpToPix(context: Context, dp: Int): Float {
-        return return dp * context.resources.displayMetrics.scaledDensity
-    }
-
     fun isValidateRepository(repo: String): Boolean = repo.isEmpty() || repo.matches(
         Regex("^(https://){0,1}(www.){0,1}github.com\\/[A-z\\d](?:[A-z\\d]|(_|-)(?=[A-z\\d])){0,256}(/)?\$",RegexOption.IGNORE_CASE)) &&
             !repo.matches(Regex("^.*(" +
