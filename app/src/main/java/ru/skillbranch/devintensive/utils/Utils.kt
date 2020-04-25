@@ -1,5 +1,7 @@
 package ru.skillbranch.devintensive.utils
 
+import android.content.Context
+
 object Utils {
     fun parseFullName(fullName:String?):Pair<String?, String?>{
         return if (!fullName?.trim().isNullOrEmpty()){
@@ -20,7 +22,7 @@ object Utils {
             var counterWords = 0
             parts.forEach {
                 if (counterWords>0) {
-                result+=divider
+                    result+=divider
                 }
                 for (i in it.indices){
                     if (it[i].toUpperCase() == it[i]){
@@ -29,14 +31,14 @@ object Utils {
                         result +=str.replaceRange(0..0,str[0].toUpperCase().toString())
                     }else{
 
-                    result +=translitChar(it[i])
+                        result +=translitChar(it[i])
                     }
                 }
                 counterWords++
 
             }
         }
-    return  result
+        return  result
     }
 
     fun translitChar(char: Char):String{
@@ -83,9 +85,9 @@ object Utils {
     fun toInitials(firstName: String?, lastName: String?): String? {
         var result:String? = ""
         if((!firstName?.trim().isNullOrEmpty()) or (!lastName?.trim().isNullOrEmpty())) {
-           if  (!firstName?.trim().isNullOrEmpty()) {
-               result = firstName?.trim()?.substring(0,1)?.toUpperCase()
-           }
+            if  (!firstName?.trim().isNullOrEmpty()) {
+                result = firstName?.trim()?.substring(0,1)?.toUpperCase()
+            }
             if (!lastName?.trim().isNullOrEmpty()) {
                 result += lastName?.trim()?.substring(0,1)?.toUpperCase()
             }
@@ -93,4 +95,25 @@ object Utils {
         return result
     }
 
+    fun isValidateRepository(repo: String): Boolean = repo.isEmpty() || repo.matches(
+        Regex("^(https://){0,1}(www.){0,1}github.com\\/[A-z\\d](?:[A-z\\d]|(_|-)(?=[A-z\\d])){0,256}(/)?\$",RegexOption.IGNORE_CASE)) &&
+            !repo.matches(Regex("^.*(" +
+                    "\\/enterprise|" +
+                    "\\/features|" +
+                    "\\/topics|" +
+                    "\\/collections|" +
+                    "\\/trending|" +
+                    "\\/events|" +
+                    "\\/marketplace" +
+                    "|\\/pricing|" +
+                    "\\/nonprofit|" +
+                    "\\/customer-stories|" +
+                    "\\/security|" +
+                    "\\/login|" +
+                    "\\/join)\$",RegexOption.IGNORE_CASE)
+            )
+
+    fun dpToPix(context: Context, dp:Int): Float{
+        return dp.toFloat()*context.resources.displayMetrics.density
+    }
 }

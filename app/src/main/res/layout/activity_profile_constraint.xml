@@ -82,7 +82,7 @@
         style="@style/Profile.EditText"
         android:layout_width="0dp"
         android:layout_height="80dp"
-        android:background="@color/colorPrimaryLight"
+        android:background="@color/color_primary_light"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
@@ -94,7 +94,7 @@
         android:layout_height="0dp"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
-        android:background="@color/colorDividerLight"
+        android:background="@color/color_divider_light"
         app:layout_constraintBottom_toBottomOf="@+id/view"
         app:layout_constraintEnd_toEndOf="@+id/view"
         app:layout_constraintStart_toStartOf="parent"
@@ -207,7 +207,7 @@
         android:layout_marginStart="72dp"
         android:layout_marginTop="5dp"
         android:layout_marginEnd="16dp"
-        android:background="@color/colorDividerDark"
+        android:background="@color/color_divider_dark"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout2" />
@@ -255,7 +255,7 @@
         android:layout_marginStart="72dp"
         android:layout_marginTop="5dp"
         android:layout_marginEnd="16dp"
-        android:background="@color/colorDividerDark"
+        android:background="@color/color_divider_dark"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout3" />
