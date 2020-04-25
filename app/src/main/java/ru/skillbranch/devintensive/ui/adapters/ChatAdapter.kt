@@ -95,7 +95,6 @@ class ChatAdapter(val listener : (ChatItem) ->Unit): RecyclerView.Adapter<ChatAd
             }
             tv_title_single.text = item.title
             tv_message_single.text = item.shortDescription
-            tv_message_author.text = item.author
             itemView.setOnClickListener{
                 listener.invoke(item)
             }
