@@ -40,7 +40,7 @@
         android:layout_toRightOf="@id/iv_avatar_user"
         android:layout_marginLeft="@dimen/spacingNormal_16"/>
     <TextView
-        android:id="@+id/yv_last_activity"
+        android:id="@+id/tv_last_activity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:text="online"
