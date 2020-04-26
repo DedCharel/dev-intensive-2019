@@ -1,10 +1,9 @@
 package ru.skillbranch.devintensive.repositories
 
-import android.app.SearchManager
 import ru.skillbranch.devintensive.models.data.Chat
 import ru.skillbranch.devintensive.models.data.User
 import ru.skillbranch.devintensive.models.data.UserItem
-import ru.skillbranch.devintensive.data.manager.CacheManager
+import ru.skillbranch.devintensive.data.managers.CacheManager
 import ru.skillbranch.devintensive.utils.DataGenerator
 
 object GroupRepository {

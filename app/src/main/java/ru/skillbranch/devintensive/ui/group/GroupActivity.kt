@@ -2,7 +2,6 @@ package ru.skillbranch.devintensive.ui.group
 
 import android.content.res.ColorStateList
 import android.graphics.Color
-import android.opengl.Visibility
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -19,12 +18,12 @@ import kotlinx.android.synthetic.main.activity_group.*
 import ru.skillbranch.devintensive.R
 import ru.skillbranch.devintensive.models.data.UserItem
 import ru.skillbranch.devintensive.ui.adapters.UserAdapter
-import ru.skillbranch.devintensive.viewmodels.GroupVIewModel
+import ru.skillbranch.devintensive.viewmodels.GroupViewModel
 
 class GroupActivity : AppCompatActivity() {
 
     private lateinit var userAdapter: UserAdapter
-    private lateinit var viewModel: GroupVIewModel
+    private lateinit var viewModel: GroupViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -89,7 +88,7 @@ class GroupActivity : AppCompatActivity() {
     }
 
     private fun initViewModel() {
-        viewModel = ViewModelProviders.of(this).get(GroupVIewModel::class.java)
+        viewModel = ViewModelProviders.of(this).get(GroupViewModel::class.java)
         viewModel.getUserData().observe(this, Observer { userAdapter.updateData(it) })
         viewModel.getSelectedData().observe(this, Observer {
             updateChips(it)
