@@ -1,10 +1,12 @@
 package ru.skillbranch.devintensive.ui.adapters
 
+import android.content.Intent
 import android.graphics.Color
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -13,9 +15,11 @@ import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.item_chat_archive.*
 import kotlinx.android.synthetic.main.item_chat_group.*
 import kotlinx.android.synthetic.main.item_chat_single.*
+import ru.skillbranch.devintensive.App
 import ru.skillbranch.devintensive.R
 import ru.skillbranch.devintensive.models.data.ChatItem
 import ru.skillbranch.devintensive.models.data.ChatType
+import ru.skillbranch.devintensive.ui.archive.ArchiveActivity
 
 class ChatAdapter(val listener : (ChatItem) ->Unit): RecyclerView.Adapter<ChatAdapter.ChatItemViewHolder>() {
     companion object{
@@ -150,10 +154,13 @@ class ChatAdapter(val listener : (ChatItem) ->Unit): RecyclerView.Adapter<ChatAd
     inner class ArchiveViewHolder(convertView: View): ChatItemViewHolder(convertView), ChatItemTouchHelperCallback.ItemTouchViewHolder {
 
         override fun bind(item: ChatItem, listener: (ChatItem)->Unit){
+
             if (item.avatar == null) {
+                if (item.id !="-1"){
                 Glide.with(itemView)
                     .clear(iv_avatar_archive)
-                iv_avatar_archive.setInitials(item.initials)
+                iv_avatar_archive.setInitials(item.initials)} else
+                    iv_avatar_archive.setImageResource(R.drawable.ic_archive_black_24dp)
             }else{
                 //TODO set drawable Glide
                 Glide.with(itemView)
@@ -172,6 +179,7 @@ class ChatAdapter(val listener : (ChatItem) ->Unit): RecyclerView.Adapter<ChatAd
             tv_title_archive.text = item.title
             tv_message_archive.text = item.shortDescription
             itemView.setOnClickListener{
+
                 listener.invoke(item)
             }
         }

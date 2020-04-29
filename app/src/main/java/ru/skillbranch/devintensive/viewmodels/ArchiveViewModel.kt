@@ -33,6 +33,17 @@ class ArchiveViewModel: ViewModel(){
         return result
     }
 
+    fun addToArchive(ChatId: String) {
+        val chat = chatRepository.find(ChatId)
+        chat ?: return
+        chatRepository.update(chat.copy(isArchived = true))
+    }
+
+    fun restoreFromArchive(ChatId: String){
+        val chat = chatRepository.find(ChatId)
+        chat ?: return
+        chatRepository.update(chat.copy(isArchived = false))
+    }
 
 
 }
