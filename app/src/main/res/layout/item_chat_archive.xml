@@ -26,6 +26,18 @@
         android:layout_marginLeft="@dimen/spacingNormal_16"
         android:layout_marginRight="@dimen/spacingNormal_16"/>
     <TextView
+        android:id="@+id/tv_message_author_archive"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="John Doe"
+        android:textColor="@color/color_primary"
+        android:fontFamily="sans-serif-medium"
+        android:textSize="14sp"
+        android:layout_toRightOf="@id/iv_avatar_archive"
+        android:layout_below="@id/tv_title_archive"
+        android:layout_marginRight="@dimen/spacingTiny_4"
+        tools:visibility="visible"/>
+    <TextView
         android:id="@+id/tv_message_archive"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -33,10 +45,10 @@
         android:textColor="@color/color_gray_dark"
         android:fontFamily="sans-serif-medium"
         android:textSize="14sp"
-        android:layout_toRightOf="@id/iv_avatar_archive"
+        android:layout_toRightOf="@id/tv_message_author_archive"
         android:layout_toLeftOf="@id/tv_counter_archive"
         android:layout_below="@id/tv_title_archive"
-        android:layout_marginLeft="@dimen/spacingNormal_16"
+
         android:layout_marginRight="@dimen/spacingNormal_16"/>
     <TextView
         android:id="@+id/tv_date_archive"
